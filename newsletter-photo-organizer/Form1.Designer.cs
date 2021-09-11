@@ -29,14 +29,24 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageSelection = new System.Windows.Forms.TabPage();
-            this.tabPageRenaming = new System.Windows.Forms.TabPage();
-            this.tabPageOverview = new System.Windows.Forms.TabPage();
             this.tabPageSetup = new System.Windows.Forms.TabPage();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnSetupTabNext = new System.Windows.Forms.Button();
+            this.btnBrowseFolder = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbxSourceFolder = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxWhichClass = new System.Windows.Forms.ComboBox();
+            this.tabPageSelection = new System.Windows.Forms.TabPage();
+            this.chkLstStudents = new System.Windows.Forms.CheckedListBox();
+            this.tabPageOverview = new System.Windows.Forms.TabPage();
+            this.tabPageRenaming = new System.Windows.Forms.TabPage();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusDebug1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabPageSetup.SuspendLayout();
+            this.tabPageSelection.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -45,62 +55,64 @@
             this.tabControl1.Controls.Add(this.tabPageSelection);
             this.tabControl1.Controls.Add(this.tabPageOverview);
             this.tabControl1.Controls.Add(this.tabPageRenaming);
-            this.tabControl1.Location = new System.Drawing.Point(13, 13);
+            this.tabControl1.Location = new System.Drawing.Point(14, 14);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(775, 463);
+            this.tabControl1.Size = new System.Drawing.Size(775, 449);
             this.tabControl1.TabIndex = 0;
-            // 
-            // tabPageSelection
-            // 
-            this.tabPageSelection.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSelection.Name = "tabPageSelection";
-            this.tabPageSelection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSelection.Size = new System.Drawing.Size(767, 437);
-            this.tabPageSelection.TabIndex = 0;
-            this.tabPageSelection.Text = "Selection";
-            this.tabPageSelection.UseVisualStyleBackColor = true;
-            // 
-            // tabPageRenaming
-            // 
-            this.tabPageRenaming.Location = new System.Drawing.Point(4, 22);
-            this.tabPageRenaming.Name = "tabPageRenaming";
-            this.tabPageRenaming.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRenaming.Size = new System.Drawing.Size(767, 437);
-            this.tabPageRenaming.TabIndex = 1;
-            this.tabPageRenaming.Text = "Renaming";
-            this.tabPageRenaming.UseVisualStyleBackColor = true;
-            // 
-            // tabPageOverview
-            // 
-            this.tabPageOverview.Location = new System.Drawing.Point(4, 22);
-            this.tabPageOverview.Name = "tabPageOverview";
-            this.tabPageOverview.Size = new System.Drawing.Size(767, 437);
-            this.tabPageOverview.TabIndex = 2;
-            this.tabPageOverview.Text = "Overview";
-            this.tabPageOverview.UseVisualStyleBackColor = true;
+            this.tabControl1.Enter += new System.EventHandler(this.tabControl1_Enter);
             // 
             // tabPageSetup
             // 
+            this.tabPageSetup.Controls.Add(this.btnSetupTabNext);
+            this.tabPageSetup.Controls.Add(this.btnBrowseFolder);
+            this.tabPageSetup.Controls.Add(this.label2);
+            this.tabPageSetup.Controls.Add(this.tbxSourceFolder);
             this.tabPageSetup.Controls.Add(this.label1);
-            this.tabPageSetup.Controls.Add(this.comboBox1);
+            this.tabPageSetup.Controls.Add(this.comboBoxWhichClass);
             this.tabPageSetup.Location = new System.Drawing.Point(4, 22);
             this.tabPageSetup.Name = "tabPageSetup";
-            this.tabPageSetup.Size = new System.Drawing.Size(767, 437);
+            this.tabPageSetup.Size = new System.Drawing.Size(767, 423);
             this.tabPageSetup.TabIndex = 3;
             this.tabPageSetup.Text = "Setup";
             this.tabPageSetup.UseVisualStyleBackColor = true;
+            this.tabPageSetup.Click += new System.EventHandler(this.tabPageSetup_Click);
             // 
-            // comboBox1
+            // btnSetupTabNext
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "M-W-F",
-            "T-Th"});
-            this.comboBox1.Location = new System.Drawing.Point(103, 35);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
+            this.btnSetupTabNext.Location = new System.Drawing.Point(588, 152);
+            this.btnSetupTabNext.Name = "btnSetupTabNext";
+            this.btnSetupTabNext.Size = new System.Drawing.Size(75, 23);
+            this.btnSetupTabNext.TabIndex = 5;
+            this.btnSetupTabNext.Text = "Next";
+            this.btnSetupTabNext.UseVisualStyleBackColor = true;
+            this.btnSetupTabNext.Click += new System.EventHandler(this.btnSetupTabNext_Click);
+            // 
+            // btnBrowseFolder
+            // 
+            this.btnBrowseFolder.Location = new System.Drawing.Point(588, 84);
+            this.btnBrowseFolder.Name = "btnBrowseFolder";
+            this.btnBrowseFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseFolder.TabIndex = 4;
+            this.btnBrowseFolder.Text = "Browse...";
+            this.btnBrowseFolder.UseVisualStyleBackColor = true;
+            this.btnBrowseFolder.Click += new System.EventHandler(this.btnBrowseFolder_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(116, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Where are the photos?";
+            // 
+            // tbxSourceFolder
+            // 
+            this.tbxSourceFolder.Location = new System.Drawing.Point(183, 86);
+            this.tbxSourceFolder.Name = "tbxSourceFolder";
+            this.tbxSourceFolder.Size = new System.Drawing.Size(399, 20);
+            this.tbxSourceFolder.TabIndex = 2;
             // 
             // label1
             // 
@@ -111,18 +123,90 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Which class?";
             // 
+            // comboBoxWhichClass
+            // 
+            this.comboBoxWhichClass.FormattingEnabled = true;
+            this.comboBoxWhichClass.Items.AddRange(new object[] {
+            "M-W-F",
+            "T-Th"});
+            this.comboBoxWhichClass.Location = new System.Drawing.Point(183, 35);
+            this.comboBoxWhichClass.Name = "comboBoxWhichClass";
+            this.comboBoxWhichClass.Size = new System.Drawing.Size(399, 21);
+            this.comboBoxWhichClass.TabIndex = 0;
+            this.comboBoxWhichClass.SelectedIndexChanged += new System.EventHandler(this.comboBoxWhichClass_SelectedIndexChanged);
+            // 
+            // tabPageSelection
+            // 
+            this.tabPageSelection.Controls.Add(this.chkLstStudents);
+            this.tabPageSelection.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSelection.Name = "tabPageSelection";
+            this.tabPageSelection.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSelection.Size = new System.Drawing.Size(767, 423);
+            this.tabPageSelection.TabIndex = 0;
+            this.tabPageSelection.Text = "Selection";
+            this.tabPageSelection.UseVisualStyleBackColor = true;
+            // 
+            // chkLstStudents
+            // 
+            this.chkLstStudents.FormattingEnabled = true;
+            this.chkLstStudents.Location = new System.Drawing.Point(551, 53);
+            this.chkLstStudents.Name = "chkLstStudents";
+            this.chkLstStudents.Size = new System.Drawing.Size(171, 304);
+            this.chkLstStudents.TabIndex = 0;
+            // 
+            // tabPageOverview
+            // 
+            this.tabPageOverview.Location = new System.Drawing.Point(4, 22);
+            this.tabPageOverview.Name = "tabPageOverview";
+            this.tabPageOverview.Size = new System.Drawing.Size(767, 423);
+            this.tabPageOverview.TabIndex = 2;
+            this.tabPageOverview.Text = "Overview";
+            this.tabPageOverview.UseVisualStyleBackColor = true;
+            // 
+            // tabPageRenaming
+            // 
+            this.tabPageRenaming.Location = new System.Drawing.Point(4, 22);
+            this.tabPageRenaming.Name = "tabPageRenaming";
+            this.tabPageRenaming.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageRenaming.Size = new System.Drawing.Size(767, 423);
+            this.tabPageRenaming.TabIndex = 1;
+            this.tabPageRenaming.Text = "Renaming";
+            this.tabPageRenaming.UseVisualStyleBackColor = true;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusDebug1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 466);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusDebug1
+            // 
+            this.statusDebug1.Name = "statusDebug1";
+            this.statusDebug1.Size = new System.Drawing.Size(79, 17);
+            this.statusDebug1.Text = "statusDebug1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 488);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "The Amazing Newsletter Photo Organizer";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPageSetup.ResumeLayout(false);
             this.tabPageSetup.PerformLayout();
+            this.tabPageSelection.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -131,10 +215,18 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageSetup;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxWhichClass;
         private System.Windows.Forms.TabPage tabPageSelection;
         private System.Windows.Forms.TabPage tabPageOverview;
         private System.Windows.Forms.TabPage tabPageRenaming;
+        private System.Windows.Forms.Button btnBrowseFolder;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbxSourceFolder;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btnSetupTabNext;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusDebug1;
+        private System.Windows.Forms.CheckedListBox chkLstStudents;
     }
 }
 
