@@ -53,12 +53,20 @@ namespace newsletter_photo_organizer
 
         private void btnSetupTabNext_Click(object sender, EventArgs e)
         {
+            int xOffset = 10;
+            int yOffset = 20;
             tabControl1.SelectedIndex += 1;
             foreach (var student in classList.students)
             {
-                chkLstStudents.Items.Add(student);
+                // Add student to list on next tab
+                CheckBox box = new CheckBox();
+                box.Text = student.Name;
+                groupBoxStudentList.Controls.Add(box);
+                box.Top = yOffset;
+                box.Left = xOffset;
+                yOffset += 20;
+
             }
-            chkLstStudents.DisplayMember = "Name";
         }
 
         private void comboBoxWhichClass_SelectedIndexChanged(object sender, EventArgs e)

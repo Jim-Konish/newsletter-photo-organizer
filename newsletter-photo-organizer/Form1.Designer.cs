@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageSetup = new System.Windows.Forms.TabPage();
             this.btnSetupTabNext = new System.Windows.Forms.Button();
@@ -37,15 +38,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxWhichClass = new System.Windows.Forms.ComboBox();
             this.tabPageSelection = new System.Windows.Forms.TabPage();
-            this.chkLstStudents = new System.Windows.Forms.CheckedListBox();
+            this.groupBoxStudentList = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.tabPageOverview = new System.Windows.Forms.TabPage();
             this.tabPageRenaming = new System.Windows.Forms.TabPage();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusDebug1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPageSetup.SuspendLayout();
             this.tabPageSelection.SuspendLayout();
+            this.groupBoxStudentList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,7 +144,9 @@
             // 
             // tabPageSelection
             // 
-            this.tabPageSelection.Controls.Add(this.chkLstStudents);
+            this.tabPageSelection.Controls.Add(this.groupBoxStudentList);
+            this.tabPageSelection.Controls.Add(this.pictureBox1);
+            this.tabPageSelection.Controls.Add(this.listView1);
             this.tabPageSelection.Location = new System.Drawing.Point(4, 22);
             this.tabPageSelection.Name = "tabPageSelection";
             this.tabPageSelection.Padding = new System.Windows.Forms.Padding(3);
@@ -146,13 +155,40 @@
             this.tabPageSelection.Text = "Selection";
             this.tabPageSelection.UseVisualStyleBackColor = true;
             // 
-            // chkLstStudents
+            // groupBoxStudentList
             // 
-            this.chkLstStudents.FormattingEnabled = true;
-            this.chkLstStudents.Location = new System.Drawing.Point(551, 53);
-            this.chkLstStudents.Name = "chkLstStudents";
-            this.chkLstStudents.Size = new System.Drawing.Size(171, 304);
-            this.chkLstStudents.TabIndex = 0;
+            this.groupBoxStudentList.Controls.Add(this.listBox1);
+            this.groupBoxStudentList.Location = new System.Drawing.Point(525, 16);
+            this.groupBoxStudentList.Name = "groupBoxStudentList";
+            this.groupBoxStudentList.Size = new System.Drawing.Size(200, 342);
+            this.groupBoxStudentList.TabIndex = 2;
+            this.groupBoxStudentList.TabStop = false;
+            this.groupBoxStudentList.Text = "Students";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(7, 177);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(187, 160);
+            this.listBox1.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(18, 139);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(488, 219);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(18, 16);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(488, 97);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // tabPageOverview
             // 
@@ -189,6 +225,12 @@
             this.statusDebug1.Size = new System.Drawing.Size(79, 17);
             this.statusDebug1.Text = "statusDebug1";
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +245,8 @@
             this.tabPageSetup.ResumeLayout(false);
             this.tabPageSetup.PerformLayout();
             this.tabPageSelection.ResumeLayout(false);
+            this.groupBoxStudentList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -226,7 +270,11 @@
         private System.Windows.Forms.Button btnSetupTabNext;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusDebug1;
-        private System.Windows.Forms.CheckedListBox chkLstStudents;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.GroupBox groupBoxStudentList;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
