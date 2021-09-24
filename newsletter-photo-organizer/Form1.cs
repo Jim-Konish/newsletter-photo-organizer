@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -10,7 +9,7 @@ using System.Windows.Forms;
 
 namespace newsletter_photo_organizer
 {
-    
+
     public partial class Form1 : Form
     {
 
@@ -56,16 +55,34 @@ namespace newsletter_photo_organizer
             int xOffset = 10;
             int yOffset = 20;
             tabControl1.SelectedIndex += 1;
+
+            int shortcutKey = 0;
             foreach (var student in classList.students)
             {
                 // Add student to list on next tab
                 CheckBox box = new CheckBox();
-                box.Text = student.Name;
+                box.Text = "(" + shortcutKey.ToString() + ") " + student.Name;
                 groupBoxStudentList.Controls.Add(box);
                 box.Top = yOffset;
                 box.Left = xOffset;
                 yOffset += 20;
+                shortcutKey++;
+            }
+        }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(tabControl1.SelectedTab == tabPageSelection)
+            {
+                tabPageSelection_KeyDown(sender, e);
+            }
+        }
+
+        private void tabPageSelection_KeyDown(object sender, KeyEventArgs e)
+        {
+            if((e.KeyValue >= (int)Keys.D0) && (e.KeyValue <= (int)Keys.D9))
+            {
+                //TODO Look up the corresponding checkbox in the dictionary to be created.
             }
         }
 
@@ -91,31 +108,6 @@ namespace newsletter_photo_organizer
         private void tabControl1_Enter(object sender, EventArgs e)
         {
 
-        }
-    }
-
-    public class Student
-    {
-        public string Name { get; }
-        public UInt16 count { get; set; }
-
-        public Student(string studentName)
-        {
-            Name = studentName;
-            count = 0;
-        }
-    }
-
-    public class ClassList
-    {
-        public List<Student> students = new List<Student>();
-
-        public ClassList(string[] names)
-        {
-            foreach (var name in names)
-            {
-                students.Add(new Student(name));
-            }
         }
     }
 }

@@ -39,7 +39,7 @@
             this.comboBoxWhichClass = new System.Windows.Forms.ComboBox();
             this.tabPageSelection = new System.Windows.Forms.TabPage();
             this.groupBoxStudentList = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxStudentsNotRepresented = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.tabPageOverview = new System.Windows.Forms.TabPage();
@@ -157,7 +157,7 @@
             // 
             // groupBoxStudentList
             // 
-            this.groupBoxStudentList.Controls.Add(this.listBox1);
+            this.groupBoxStudentList.Controls.Add(this.listBoxStudentsNotRepresented);
             this.groupBoxStudentList.Location = new System.Drawing.Point(525, 16);
             this.groupBoxStudentList.Name = "groupBoxStudentList";
             this.groupBoxStudentList.Size = new System.Drawing.Size(200, 342);
@@ -165,13 +165,13 @@
             this.groupBoxStudentList.TabStop = false;
             this.groupBoxStudentList.Text = "Students";
             // 
-            // listBox1
+            // listBoxStudentsNotRepresented
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(7, 177);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(187, 160);
-            this.listBox1.TabIndex = 1;
+            this.listBoxStudentsNotRepresented.FormattingEnabled = true;
+            this.listBoxStudentsNotRepresented.Location = new System.Drawing.Point(7, 177);
+            this.listBoxStudentsNotRepresented.Name = "listBoxStudentsNotRepresented";
+            this.listBoxStudentsNotRepresented.Size = new System.Drawing.Size(187, 160);
+            this.listBoxStudentsNotRepresented.TabIndex = 1;
             // 
             // pictureBox1
             // 
@@ -238,6 +238,7 @@
             this.ClientSize = new System.Drawing.Size(800, 488);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "The Amazing Newsletter Photo Organizer";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -274,7 +275,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.GroupBox groupBoxStudentList;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxStudentsNotRepresented;
     }
 }
 
