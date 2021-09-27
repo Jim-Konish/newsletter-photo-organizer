@@ -14,6 +14,7 @@ namespace newsletter_photo_organizer
 
         public Photo(List<String> names, string pathName)
         {
+            studentPresence = new Dictionary<string, bool>();
             foreach (String name in names)
             {
                 studentPresence.Add(name, false);
@@ -25,6 +26,7 @@ namespace newsletter_photo_organizer
 
         public List<String> Star()
         {
+            Starred = true;
             List<String> studentsPresent = new List<string>();
             foreach (String name in studentPresence.Keys)
             {
@@ -35,6 +37,33 @@ namespace newsletter_photo_organizer
             }
 
             return studentsPresent;
+        }
+
+        public List<String> UnStar()
+        {
+            Starred = false;
+            List<String> studentsPresent = new List<string>();
+            foreach (String name in studentPresence.Keys)
+            {
+                if (studentPresence[name])
+                {
+                    studentsPresent.Add(name);
+                }
+            }
+
+            return studentsPresent;
+        }
+
+        public List<string> ToggleStarred()
+        {
+            if (Starred)
+            {
+                return UnStar();
+            }
+            else
+            {
+                return Star();
+            }
         }
     }
 }

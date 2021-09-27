@@ -22,6 +22,7 @@ namespace newsletter_photo_organizer
 
         public PhotoManager(List<string> studentNames)
         {
+            StudentNames = studentNames;
             ImagesPath = "";
         }
 
@@ -36,7 +37,7 @@ namespace newsletter_photo_organizer
                 foreach (string imagePathName in imagePathNames)
                 {
                     allImages.Add(imagePathName);
-                    Photos.Add(new Photo(studentNames, imagePathName));
+                    Photos.Add(new Photo(StudentNames, imagePathName));
                 }
             }
             catch (Exception e)
@@ -47,9 +48,9 @@ namespace newsletter_photo_organizer
 
         }
 
-        public string GetSelectedImage()
+        public Photo GetSelectedImage()
         {
-            return allImages[selectedImageIndex];
+            return Photos[selectedImageIndex];
         }
     }
 }

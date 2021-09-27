@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace newsletter_photo_organizer
 {
@@ -6,6 +7,7 @@ namespace newsletter_photo_organizer
     {
         public string Name { get; }
         public UInt16 Count { get; set;}
+        public CheckBox MyCheckBox { get; set; }
 
         public Student(string studentName)
         {

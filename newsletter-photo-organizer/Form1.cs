@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -29,6 +30,8 @@ namespace newsletter_photo_organizer
             "Gimli"
         };
 
+        private Dictionary<int, CheckBox> shortcuts = new Dictionary<int, CheckBox>();
+
         private ClassList classList;
 
         public PhotoManager photoManager;
@@ -57,7 +60,23 @@ namespace newsletter_photo_organizer
             int yOffset = 20;
             tabControl1.SelectedIndex += 1;
 
-            int shortcutKey = 0;
+            int[] keys =
+            {
+                (int)Keys.D1,
+                (int)Keys.D2,
+                (int)Keys.D3,
+                (int)Keys.D4,
+                (int)Keys.D5,
+                (int)Keys.D6,
+                (int)Keys.D7,
+                (int)Keys.D8,
+                (int)Keys.D9,
+                (int)Keys.D0,
+            };
+
+            int keyIndex = 0;
+
+            int shortcutKey = 1;
             foreach (var student in classList.Students)
             {
                 // Add student to list on next tab
@@ -67,10 +86,21 @@ namespace newsletter_photo_organizer
                 box.Top = yOffset;
                 box.Left = xOffset;
                 yOffset += 20;
+                student.MyCheckBox = box;
+
+                shortcuts.Add(keys[keyIndex], box);
+                
                 shortcutKey++;
+                keyIndex++;
+
+                // If there are 10 students in the class, we'll need to use 0 for the tenth one
+                if(shortcutKey > 9)
+                {
+                    shortcutKey = 0;
+                }
             }
-
-
+            updateSelectedClass();
+            UpdateAbsentStudents();
             photoManager.LoadImages(tbxSourceFolder.Text);
             
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -88,7 +118,8 @@ namespace newsletter_photo_organizer
         {
             if((e.KeyValue >= (int)Keys.D0) && (e.KeyValue <= (int)Keys.D9))
             {
-                //TODO Look up the corresponding checkbox in the dictionary to be created.
+                shortcuts[e.KeyValue].Checked = !shortcuts[e.KeyValue].Checked;
+                UpdateAbsentStudents();
             }
             if (e.KeyValue == (int)Keys.Left)
             {
@@ -114,22 +145,51 @@ namespace newsletter_photo_organizer
                 }
                 updatePictureBoxImage();
             }
+            if (e.KeyValue == (int)Keys.Space)
+            {
+                List<string> studentNamesPresent = photoManager.GetSelectedImage().ToggleStarred();
+                throw NotImplementedException;
+
+                // TODO look up the students present in the selected photo and increment or decrement their counts
+            }
         }
 
         private void comboBoxWhichClass_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxWhichClass.SelectedIndex == 0)
+            updateSelectedClass();
+        }
+
+        private void updateSelectedClass()
+        {
+            List<string> classNames;
+            if (comboBoxWhichClass.SelectedIndex == 0)
             {
-                statusDebug1.Text = "MWF";
-                classList = new ClassList(mwfNames);
+                classNames = new List<string>(mwfNames);
             }
             else
             {
-                statusDebug1.Text = "TTh";
-                classList = new ClassList(tthNames);
+                classNames = new List<string>(tthNames);
             }
+            classList = new ClassList(classNames);
+            photoManager = new PhotoManager(classNames);
+        }
 
-            photoManager = new PhotoManager(classList);
+        private void UpdateAbsentStudents()
+        {
+            foreach (Student student in classList.Students)
+            {
+                if(student.Count == 0)
+                {
+                    if (!listBoxStudentsNotRepresented.Items.Contains(student.Name))
+                    {
+                        listBoxStudentsNotRepresented.Items.Add(student.Name);
+                    }
+                }
+                else if(listBoxStudentsNotRepresented.Items.Contains(student.Name))
+                {
+                    listBoxStudentsNotRepresented.Items.Remove(student.Name);
+                }
+            }
         }
 
         private void tabPageSetup_Click(object sender, EventArgs e)
@@ -144,7 +204,26 @@ namespace newsletter_photo_organizer
 
         private void updatePictureBoxImage()
         {
-            pictureBox1.Image = new Bitmap(photoManager.GetSelectedImage());
+            pictureBox1.Image = new Bitmap(photoManager.GetSelectedImage().PathName);
+        }
+
+        private void checkBoxCheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+            foreach (Student student in classList.Students)
+            {
+                if((box == student.MyCheckBox) && photoManager.GetSelectedImage().Starred)
+                {
+                    if(box.Checked)
+                    {
+                        student.Count++;
+                    }
+                    else
+                    {
+                        student.Count--;
+                    }
+                }
+            }
         }
     }
 }

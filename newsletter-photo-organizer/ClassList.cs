@@ -6,7 +6,7 @@ namespace newsletter_photo_organizer
     {
         private List<Student> students = new List<Student>();
 
-        public ClassList(string[] names)
+        public ClassList(List<string> names)
         {
             foreach (var name in names)
             {
