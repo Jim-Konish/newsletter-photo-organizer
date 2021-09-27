@@ -8,19 +8,19 @@ namespace newsletter_photo_organizer
 {
     public class Photo
     {
-        public int refToPhoto;
+        public string PathName;
         public Dictionary<String, bool> studentPresence { get; }
-        public bool starred { get; private set; }
+        public bool Starred { get; private set; }
 
-        public Photo(List<String> names, int refToPhotoArg)
+        public Photo(List<String> names, string pathName)
         {
             foreach (String name in names)
             {
                 studentPresence.Add(name, false);
             }
 
-            refToPhoto = refToPhotoArg;
-            starred = false;
+            PathName = pathName;
+            Starred = false;
         }
 
         public List<String> Star()

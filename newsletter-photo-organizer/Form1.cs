@@ -31,7 +31,8 @@ namespace newsletter_photo_organizer
 
         private ClassList classList;
 
-        
+        public PhotoManager photoManager;
+
         public Form1()
         {
             InitializeComponent();
@@ -57,7 +58,7 @@ namespace newsletter_photo_organizer
             tabControl1.SelectedIndex += 1;
 
             int shortcutKey = 0;
-            foreach (var student in classList.students)
+            foreach (var student in classList.Students)
             {
                 // Add student to list on next tab
                 CheckBox box = new CheckBox();
@@ -68,6 +69,11 @@ namespace newsletter_photo_organizer
                 yOffset += 20;
                 shortcutKey++;
             }
+
+
+            photoManager.LoadImages(tbxSourceFolder.Text);
+            
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -84,6 +90,30 @@ namespace newsletter_photo_organizer
             {
                 //TODO Look up the corresponding checkbox in the dictionary to be created.
             }
+            if (e.KeyValue == (int)Keys.Left)
+            {
+                if(photoManager.selectedImageIndex <= 0)
+                {
+                    photoManager.selectedImageIndex = photoManager.allImages.Count - 1;
+                }
+                else
+                {
+                    photoManager.selectedImageIndex--;
+                }
+                updatePictureBoxImage();
+            }
+            if (e.KeyValue == (int)Keys.Right)
+            {
+                if (photoManager.selectedImageIndex >= photoManager.allImages.Count - 1)
+                {
+                    photoManager.selectedImageIndex = 0;
+                }
+                else
+                {
+                    photoManager.selectedImageIndex++;
+                }
+                updatePictureBoxImage();
+            }
         }
 
         private void comboBoxWhichClass_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,6 +128,8 @@ namespace newsletter_photo_organizer
                 statusDebug1.Text = "TTh";
                 classList = new ClassList(tthNames);
             }
+
+            photoManager = new PhotoManager(classList);
         }
 
         private void tabPageSetup_Click(object sender, EventArgs e)
@@ -108,6 +140,11 @@ namespace newsletter_photo_organizer
         private void tabControl1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void updatePictureBoxImage()
+        {
+            pictureBox1.Image = new Bitmap(photoManager.GetSelectedImage());
         }
     }
 }

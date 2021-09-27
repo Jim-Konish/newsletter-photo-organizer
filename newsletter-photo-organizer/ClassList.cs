@@ -4,14 +4,16 @@ namespace newsletter_photo_organizer
 {
     public class ClassList
     {
-        public List<Student> students = new List<Student>();
+        private List<Student> students = new List<Student>();
 
         public ClassList(string[] names)
         {
             foreach (var name in names)
             {
-                students.Add(new Student(name));
+                Students.Add(new Student(name));
             }
         }
+
+        public List<Student> Students { get => students; set => students = value; }
     }
 }

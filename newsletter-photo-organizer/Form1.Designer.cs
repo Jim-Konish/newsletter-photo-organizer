@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageSetup = new System.Windows.Forms.TabPage();
             this.btnSetupTabNext = new System.Windows.Forms.Button();
@@ -47,7 +46,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusDebug1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPageSetup.SuspendLayout();
             this.tabPageSelection.SuspendLayout();
@@ -225,12 +223,6 @@
             this.statusDebug1.Size = new System.Drawing.Size(79, 17);
             this.statusDebug1.Text = "statusDebug1";
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,6 +234,7 @@
             this.Name = "Form1";
             this.Text = "The Amazing Newsletter Photo Organizer";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.tabPageSetup.ResumeLayout(false);
             this.tabPageSetup.PerformLayout();
@@ -273,7 +266,6 @@
         private System.Windows.Forms.ToolStripStatusLabel statusDebug1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.GroupBox groupBoxStudentList;
         private System.Windows.Forms.ListBox listBoxStudentsNotRepresented;
     }
