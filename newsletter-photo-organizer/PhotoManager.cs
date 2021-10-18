@@ -18,11 +18,12 @@ namespace newsletter_photo_organizer
 
         public int selectedImageIndex;
 
-        public List<string> StudentNames;
+        public ClassList MyClassList;
 
-        public PhotoManager(List<string> studentNames)
+        public PhotoManager(ClassList SelectedClassList)
         {
-            StudentNames = studentNames;
+            // This just holds onto a reference to the external ClassList
+            MyClassList = SelectedClassList;
             ImagesPath = "";
         }
 
@@ -37,7 +38,7 @@ namespace newsletter_photo_organizer
                 foreach (string imagePathName in imagePathNames)
                 {
                     allImages.Add(imagePathName);
-                    Photos.Add(new Photo(StudentNames, imagePathName));
+                    Photos.Add(new Photo(MyClassList.Students, imagePathName));
                 }
             }
             catch (Exception e)
@@ -51,6 +52,30 @@ namespace newsletter_photo_organizer
         public Photo GetSelectedImage()
         {
             return Photos[selectedImageIndex];
+        }
+
+        public void UpdateAllStudents()
+        {
+            // Zero each students count since we're rebuilding it from scratch
+            foreach (Student student in MyClassList.Students)
+            {
+                student.Count = 0;
+            }
+
+            // Increment count for each student present in each starred photo
+            foreach (Photo photo in Photos)
+            {
+                if (photo.Starred)
+                {
+                    foreach (Student student in MyClassList.Students)
+                    {
+                        if(photo.studentPresence[student])
+                        {
+                            student.Count++;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -9,61 +9,34 @@ namespace newsletter_photo_organizer
     public class Photo
     {
         public string PathName;
-        public Dictionary<String, bool> studentPresence { get; }
+        public Dictionary<Student, bool> studentPresence { get; }
         public bool Starred { get; private set; }
 
-        public Photo(List<String> names, string pathName)
+        public Photo(List<Student> studentsParam, string pathName)
         {
-            studentPresence = new Dictionary<string, bool>();
-            foreach (String name in names)
+            studentPresence = new Dictionary<Student, bool>();
+            foreach (Student student in studentsParam)
             {
-                studentPresence.Add(name, false);
+                studentPresence.Add(student, false);
             }
 
             PathName = pathName;
             Starred = false;
         }
 
-        public List<String> Star()
+        public void Star()
         {
             Starred = true;
-            List<String> studentsPresent = new List<string>();
-            foreach (String name in studentPresence.Keys)
-            {
-                if(studentPresence[name])
-                {
-                    studentsPresent.Add(name);
-                }
-            }
-
-            return studentsPresent;
         }
 
-        public List<String> UnStar()
+        public void UnStar()
         {
             Starred = false;
-            List<String> studentsPresent = new List<string>();
-            foreach (String name in studentPresence.Keys)
-            {
-                if (studentPresence[name])
-                {
-                    studentsPresent.Add(name);
-                }
-            }
-
-            return studentsPresent;
         }
 
-        public List<string> ToggleStarred()
+        public void ToggleStarred()
         {
-            if (Starred)
-            {
-                return UnStar();
-            }
-            else
-            {
-                return Star();
-            }
+            Starred = !Starred;
         }
     }
 }

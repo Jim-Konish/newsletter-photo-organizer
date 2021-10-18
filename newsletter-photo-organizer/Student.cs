@@ -7,7 +7,7 @@ namespace newsletter_photo_organizer
     {
         public string Name { get; }
         public UInt16 Count { get; set;}
-        public CheckBox MyCheckBox { get; set; }
+        public CheckBox MyCheckBox;
 
         public Student(string studentName)
         {

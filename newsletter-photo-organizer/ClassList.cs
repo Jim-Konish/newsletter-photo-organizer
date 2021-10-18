@@ -4,7 +4,7 @@ namespace newsletter_photo_organizer
 {
     public class ClassList
     {
-        private List<Student> students = new List<Student>();
+        public List<Student> Students = new List<Student>();
 
         public ClassList(List<string> names)
         {
@@ -14,6 +14,6 @@ namespace newsletter_photo_organizer
             }
         }
 
-        public List<Student> Students { get => students; set => students = value; }
+        //public List<Student> Students { get => students; set => students = value; }
     }
 }

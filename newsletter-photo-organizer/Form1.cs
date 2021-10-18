@@ -80,13 +80,14 @@ namespace newsletter_photo_organizer
             foreach (var student in classList.Students)
             {
                 // Add student to list on next tab
-                CheckBox box = new CheckBox();
+                student.MyCheckBox = new CheckBox();
+                CheckBox box = student.MyCheckBox;
                 box.Text = "(" + shortcutKey.ToString() + ") " + student.Name;
                 groupBoxStudentList.Controls.Add(box);
                 box.Top = yOffset;
                 box.Left = xOffset;
+                box.CheckedChanged += CheckBoxCheckedChanged;
                 yOffset += 20;
-                student.MyCheckBox = box;
 
                 shortcuts.Add(keys[keyIndex], box);
                 
@@ -98,12 +99,18 @@ namespace newsletter_photo_organizer
                 {
                     shortcutKey = 0;
                 }
+
+                if(student.MyCheckBox == null)
+                {
+                    throw new NullReferenceException("MyCheckBox cannot be NULL");
+                }
             }
             updateSelectedClass();
             UpdateAbsentStudents();
             photoManager.LoadImages(tbxSourceFolder.Text);
             
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            updatePictureBoxImage();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -119,6 +126,7 @@ namespace newsletter_photo_organizer
             if((e.KeyValue >= (int)Keys.D0) && (e.KeyValue <= (int)Keys.D9))
             {
                 shortcuts[e.KeyValue].Checked = !shortcuts[e.KeyValue].Checked;
+                photoManager.UpdateAllStudents();
                 UpdateAbsentStudents();
             }
             if (e.KeyValue == (int)Keys.Left)
@@ -147,10 +155,11 @@ namespace newsletter_photo_organizer
             }
             if (e.KeyValue == (int)Keys.Space)
             {
-                List<string> studentNamesPresent = photoManager.GetSelectedImage().ToggleStarred();
-                throw NotImplementedException;
+                photoManager.GetSelectedImage().ToggleStarred();
 
-                // TODO look up the students present in the selected photo and increment or decrement their counts
+                photoManager.UpdateAllStudents();
+
+                statusDebug1.Text = (photoManager.GetSelectedImage().Starred) ? "Starred" : "Unstarred";
             }
         }
 
@@ -171,7 +180,7 @@ namespace newsletter_photo_organizer
                 classNames = new List<string>(tthNames);
             }
             classList = new ClassList(classNames);
-            photoManager = new PhotoManager(classNames);
+            photoManager = new PhotoManager(classList);
         }
 
         private void UpdateAbsentStudents()
@@ -207,23 +216,25 @@ namespace newsletter_photo_organizer
             pictureBox1.Image = new Bitmap(photoManager.GetSelectedImage().PathName);
         }
 
-        private void checkBoxCheckedChanged(object sender, EventArgs e)
+        private void CheckBoxCheckedChanged(object sender, EventArgs e)
         {
+            statusStrip1.Text += " CHANGED";
             CheckBox box = (CheckBox)sender;
             foreach (Student student in classList.Students)
             {
-                if((box == student.MyCheckBox) && photoManager.GetSelectedImage().Starred)
+                if(box == student.MyCheckBox)
                 {
-                    if(box.Checked)
-                    {
-                        student.Count++;
-                    }
-                    else
-                    {
-                        student.Count--;
-                    }
+                    // The checked state of the box determines whether this student is present
+                    // in this photo.
+                    photoManager.GetSelectedImage().studentPresence[student] = box.Checked;
                 }
             }
+
+            // Update the counts for all students
+            photoManager.UpdateAllStudents();
+
+            // Update the absent students list
+            UpdateAbsentStudents();
         }
     }
 }

@@ -46,6 +46,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusDebug1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPageSetup.SuspendLayout();
             this.tabPageSelection.SuspendLayout();
@@ -155,6 +156,7 @@
             // 
             // groupBoxStudentList
             // 
+            this.groupBoxStudentList.Controls.Add(this.label3);
             this.groupBoxStudentList.Controls.Add(this.listBoxStudentsNotRepresented);
             this.groupBoxStudentList.Location = new System.Drawing.Point(525, 16);
             this.groupBoxStudentList.Name = "groupBoxStudentList";
@@ -223,6 +225,15 @@
             this.statusDebug1.Size = new System.Drawing.Size(79, 17);
             this.statusDebug1.Text = "statusDebug1";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 158);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Students Left Out:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,6 +251,7 @@
             this.tabPageSetup.PerformLayout();
             this.tabPageSelection.ResumeLayout(false);
             this.groupBoxStudentList.ResumeLayout(false);
+            this.groupBoxStudentList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -268,6 +280,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.GroupBox groupBoxStudentList;
         private System.Windows.Forms.ListBox listBoxStudentsNotRepresented;
+        private System.Windows.Forms.Label label3;
     }
 }
 
